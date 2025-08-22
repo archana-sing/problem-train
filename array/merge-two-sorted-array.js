@@ -18,3 +18,7 @@ function mergeSortedArrays(arr1, arr2) {
 }
 
 console.log(mergeSortedArrays([2,3,4,5,7], [1,2,4,6,8]))
+
+// Time Complexity: O(n + m)
+
+// Space Complexity: O(n + m)
