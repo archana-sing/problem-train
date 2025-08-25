@@ -1,15 +1,17 @@
 class Node {
   constructor(value) {
     this.value = value;
+    this.prev = null;
     this.next = null;
   }
 }
 
-class LinkedList {
+class DoublyLinkedList {
   constructor(value) {
     this.head = {
       value: value,
-      next: null
+      next: null,
+      prev: null
     };
     this.tail = this.head;
     this.length = 1;
@@ -19,6 +21,7 @@ class LinkedList {
   append (value) {
     const newNode = new Node(value);
     this.tail.next = newNode;
+    newNode.prev = this.tail;
     this.tail = newNode;
     this.length++;
     return this;
@@ -28,6 +31,7 @@ class LinkedList {
   prepend (value) {
     const newNode = new Node(value);
     newNode.next = this.head;
+    this.head.prev = newNode;
     this.head = newNode;
     this.length++;
   }
@@ -65,8 +69,10 @@ class LinkedList {
     }
     const newNode = new Node(value);
     let leftNode = this.traverse(index - 1);
-    //console.log(currentNode);
-    newNode.next = leftNode.next;
+    const rightNode = leftNode.next;
+    newNode.prev = leftNode;
+    newNode.next = rightNode;
+    rightNode.prev = newNode;
     leftNode.next = newNode;
     this.length++;
     return;
@@ -95,7 +101,7 @@ class LinkedList {
   }
 }
 
-const ll1 = new LinkedList(1);
+const ll1 = new DoublyLinkedList(1);
 ll1.append(3);
 ll1.append(5);
 ll1.prepend(0);
@@ -106,8 +112,8 @@ ll1.insert(6,6);
 // ll1.remove(4);
 // ll1.remove(0);
 ll1.remove(6);
-ll1.printList();
-//console.log(ll1)
+//ll1.printList();
+console.log(ll1)
 
 
 // gabage collector, how memory works as soon as we remove refrence, garbage collected and deleted
