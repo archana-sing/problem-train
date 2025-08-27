@@ -44,6 +44,9 @@ class Stack {
     if(!this.top) {
       return null;
     }
+    if (this.top === this.bottom) { // one item is on the list
+      this.bottom = null;
+    }
     const item = this.top;
     this.top = this.top.next;
     this.length--;
